@@ -1,5 +1,8 @@
+set(CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS}")
+
 cmake_minimum_required(VERSION 2.8.3)
 project(s8_ip)
+
 find_package(catkin REQUIRED COMPONENTS
   	sensor_msgs
 	cv_bridge
@@ -7,6 +10,9 @@ find_package(catkin REQUIRED COMPONENTS
 	std_msgs
 	image_transport
 	message_generation
+	pcl_conversions
+  	pcl_ros
+  	s8_common_node
 )
 
 add_message_files(FILES
@@ -17,7 +23,9 @@ generate_messages(DEPENDENCIES
 	std_msgs
 )
 
-catkin_package(CATKIN_DEPENDS message_runtime
+catkin_package(
+	DEPENDS
+	CATKIN_DEPENDS message_runtime s8_common_node
 )
 include_directories(${catkin_INCLUDE_DIRS})
 
@@ -27,3 +35,6 @@ target_link_libraries(imageConverter ${catkin_LIBRARIES})
 
 add_executable(objectTracker src/object_tracker.cpp)
 target_link_libraries(objectTracker ${catkin_LIBRARIES})
+
+add_executable(objectRecognition src/object_recognition.cpp)
+target_link_libraries(objectRecognition ${catkin_LIBRARIES})
