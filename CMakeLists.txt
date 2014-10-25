@@ -38,3 +38,9 @@ target_link_libraries(objectTracker ${catkin_LIBRARIES})
 
 add_executable(objectRecognition src/object_recognition.cpp)
 target_link_libraries(objectRecognition ${catkin_LIBRARIES})
+
+add_executable(houghcircle src/houghcircle.cpp)
+target_link_libraries(houghcircle ${catkin_LIBRARIES})
+
+add_executable(ball_detector src/ball_detector.cpp)
+target_link_libraries(ball_detector ${catkin_LIBRARIES})
