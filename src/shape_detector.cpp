@@ -96,7 +96,11 @@ public:
         isInitializedColor = true;
     }
 
-
+    void colorPreProcess(cv::Mat *HSVImage, cv::Mat *RGBImage)
+    {
+        // Blur the image
+        GaussianBlur( *HSVImage, *HSVImage, Size(9, 9), 2, 2 );
+    }
 
     void getDirection()
     {
@@ -106,11 +110,13 @@ public:
         cv::Mat src;
         cv::Mat gray;
         src = cv_ptr->image;
-        cv::cvtColor(src, gray, CV_BGR2GRAY);
+        //colorPreProcess(&src, &src);
 
+        cv::cvtColor(src, gray, CV_BGR2GRAY);
+        
         // Use Canny instead of threshold to catch squares with gradient shading
         cv::Mat bw;
-        cv::Canny(gray, bw, 0, 50, 5);
+        cv::Canny(gray, bw, 10, 200, 5);
 
         // Find contours
         std::vector<std::vector<cv::Point> > contours;
@@ -172,9 +178,9 @@ public:
             }
         }
 
-        cv::imshow(OPENCV_WINDOW, src);
+        cv::imshow(OPENCV_WINDOW, bw);
         cv::imshow(OPENCV_WINDOW_CONTROL, dst);
-        cv::waitKey(0);
+        cv::waitKey(3);
     }
 };
 

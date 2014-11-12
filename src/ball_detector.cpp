@@ -133,7 +133,7 @@ public:
 
 
         // Blur the image
-        //GaussianBlur( tmpHSVImage, tmpHSVImage, Size(5, 5), 2, 2 );
+        GaussianBlur( *RGBImage, *RGBImage, Size(15, 15), 8, 8 );
         //inRange(tmpHSVImage, Scalar(iLowH, iLowS, iLowV), Scalar(iHighH, iHighS, iHighV), tmpgrayScaleImage);
         //*HSVImage = tmpHSVImage;
         //*grayScaleImage = tmpgrayScaleImage;
@@ -216,3 +216,5 @@ int main(int argc, char** argv)
     ic.~BallDectector();
     return 0;
 }
+
+
