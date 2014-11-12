@@ -216,5 +216,3 @@ int main(int argc, char** argv)
     ic.~BallDectector();
     return 0;
 }
-
-
